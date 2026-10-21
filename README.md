@@ -1,0 +1,42 @@
+# RP Control Center 0.1.0
+
+Zentrales Ingame-Fenster für RPChatMod, HexerRP, PaladinRP, JaegerRP und DruidenRP.
+
+## Installation
+
+Kopiere `RPControlCenter` neben die fünf anderen AddOn-Ordner in `Interface/AddOns`. Aktiviere es in der AddOn-Auswahl. Öffne es mit `/rpconfig` oder `/rpcc`.
+
+## Einstellungen
+
+- AddOn-Auswahl: stellt die **echten** pro Charakter gespeicherten Einstellungen des ausgewählten AddOns dar.
+- RP-Textausgabe: setzt `textChance` auf 0; bei Wiederaktivierung wird der vorherige positive Wert wiederhergestellt. Emote-Animationen können weiter ausgeführt werden.
+- Textchance: ±10 Prozentpunkte; Textsprache: `outputLanguage`; Ausgabekanal: `chatChannel`.
+- RPChatMod: `racialLanguageMode` (`auto/on/off`), `groupLanguageMode` (`on/off`), `nativeEmotes`.
+- Diagnose: meldet **nur Einstellungsänderungen durch das Control Center**, kein systemweites Debugging.
+- Sprachstatus: ruft die bestehende Diagnose `/rc languagestatus` auf.
+
+Die Optionen der fünf AddOns bleiben in ihren ursprünglichen `SavedVariablesPerCharacter` gespeichert. Das Control Center speichert nur Diagnosemodus und zuletzt verwendete Textchancen in `RPControlCenter_CharacterDB`. Änderungen über Slash-Befehle werden beim erneuten Öffnen aktualisiert.
+
+## Grenzen
+
+Dies ist eine erste WoW-Forever-16001-GUI. Nicht alle Bedienelemente sind deaktiviert, wenn ein AddOn fehlt (Textlisten werden jedoch nicht verändert). Die Spracheinstellung für die Ausgabe ist **nicht** die WoW-Volkssprache. `GROUP` als Kanal wird nur angeboten, wenn das jeweilige AddOn ihn unterstützt. Keine automatische Zaubererkennung, keine Textbearbeitung, kein automatisches globales Debug-Logging.
+
+## Backup
+
+Vor der Installation vorhandene AddOn-Ordner und den `WTF`-Ordner sichern. Das Gesamtpaket wird als neue ZIP geliefert; die bestehenden Quellcodedateien der fünf AddOns werden nicht geändert. Im Spiel persistiert WoW SavedVariables beim Ausloggen/Reload.
+
+## Test im Spiel
+
+1. `/rpconfig`, alle fünf AddOns durchschalten.
+2. RPChatMod: Volkssprache `auto`, Gruppensprache aktivieren, mit `/rc languagestatus` testen.
+3. RP-Ausgabe deaktivieren, Chat-Text kontrollieren und anschließend wieder aktivieren.
+4. `/reload`, gespeicherte Werte kontrollieren.
+5. Fehlende AddOns durch vorübergehendes Deaktivieren testen.
+
+## Lizenz
+
+Code MPL-2.0, siehe `LICENSE`.
+
+## Version 0.2.0 Ambient
+
+Ambient an/aus, Kampffreigabe, Chance und Test im zentralen Fenster. Details: `AMBIENT.md`.
