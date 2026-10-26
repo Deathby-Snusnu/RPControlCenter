@@ -8,6 +8,8 @@
 - Textchance, Ausgabe/Textsprache/Kanal, Diagnose und Wiederherstellung der Textchance.
 - Hilfe und Installations-/Testhinweise.
 
-## Version 0.2.0 Ambient
+## 0.2.0
 
-Ambient an/aus, Kampffreigabe, Chance und Test im zentralen Fenster. Details: `AMBIENT.md`.
+- Ambient-Einstellungen für unterstützte AddOns integriert: aktivieren,
+  Kampf-Freigabe, Chance und manueller Test; das Intervall wird angezeigt.
+- Details stehen in [AMBIENT.md](AMBIENT.md).

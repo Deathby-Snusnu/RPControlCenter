@@ -1,4 +1,4 @@
-# RP Control Center 0.1.0
+# RP Control Center 0.2.0
 
 Zentrales Ingame-Fenster für RPChatMod, HexerRP, PaladinRP, JaegerRP und DruidenRP.
 
@@ -12,6 +12,11 @@ Kopiere `RPControlCenter` neben die fünf anderen AddOn-Ordner in `Interface/Add
 - RP-Textausgabe: setzt `textChance` auf 0; bei Wiederaktivierung wird der vorherige positive Wert wiederhergestellt. Emote-Animationen können weiter ausgeführt werden.
 - Textchance: ±10 Prozentpunkte; Textsprache: `outputLanguage`; Ausgabekanal: `chatChannel`.
 - RPChatMod: `racialLanguageMode` (`auto/on/off`), `groupLanguageMode` (`on/off`), `nativeEmotes`.
+- Ambient: aktivieren, Kampf-Freigabe, Chance in 10-Prozent-Schritten,
+  Intervallanzeige und Test für unterstützte Ambient-AddOns. Das Intervall
+  wird weiterhin über den Slash-Befehl des jeweiligen AddOns eingestellt.
+  Details stehen in
+  [AMBIENT.md](AMBIENT.md).
 - Diagnose: meldet **nur Einstellungsänderungen durch das Control Center**, kein systemweites Debugging.
 - Sprachstatus: ruft die bestehende Diagnose `/rc languagestatus` auf.
 
@@ -36,7 +41,3 @@ Vor der Installation vorhandene AddOn-Ordner und den `WTF`-Ordner sichern. Das G
 ## Lizenz
 
 Code MPL-2.0, siehe `LICENSE`.
-
-## Version 0.2.0 Ambient
-
-Ambient an/aus, Kampffreigabe, Chance und Test im zentralen Fenster. Details: `AMBIENT.md`.
