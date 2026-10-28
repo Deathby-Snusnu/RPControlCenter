@@ -1,6 +1,6 @@
 # RP Control Center 0.2.0
 
-Zentrales Ingame-Fenster für RPChatMod, HexerRP, PaladinRP, JaegerRP und DruidenRP.
+Zentrales Ingame-Fenster für RPChatMod, HexerRP, PaladinRP, JaegerRP, DruidenRP und MagierRP (sobald installiert).
 
 ## Installation
 
@@ -21,6 +21,16 @@ Kopiere `RPControlCenter` neben die fünf anderen AddOn-Ordner in `Interface/Add
 - Sprachstatus: ruft die bestehende Diagnose `/rc languagestatus` auf.
 
 Die Optionen der fünf AddOns bleiben in ihren ursprünglichen `SavedVariablesPerCharacter` gespeichert. Das Control Center speichert nur Diagnosemodus und zuletzt verwendete Textchancen in `RPControlCenter_CharacterDB`. Änderungen über Slash-Befehle werden beim erneuten Öffnen aktualisiert.
+
+## MagierRP
+
+MagierRP erscheint in der AddOn-Auswahl. Für ein geladenes MagierRP gibt es die
+Einstellung **volkstypische Zaubertexte** (0 bis 100 % in Schritten von 10 %).
+Diese Änderung wird pro Charakter in den MagierRP-SavedVariables gespeichert.
+Ohne installiertes/geladenes MagierRP sind die Bedienelemente deaktiviert.
+Die MagierRP-Integration benötigt eine MagierRP-Version, die `racialTextChance`
+in ihrer Charakterdatenbank und `_G.MagierRP` bereitstellt (parallel im
+RPTextStudio-PR #34). Der Client-Test steht noch aus.
 
 ## Grenzen
 
