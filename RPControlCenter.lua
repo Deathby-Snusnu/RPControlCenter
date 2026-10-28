@@ -1,7 +1,7 @@
 -- SPDX-License-Identifier: MPL-2.0
 -- RP Control Center 0.2.0. Separate GUI; no modifications to other addons.
 local addonName = ...
-local names = {"RPChatMod", "HexerRP", "PaladinRP", "JaegerRP", "DruidenRP"}
+local names = {"RPChatMod", "HexerRP", "PaladinRP", "JaegerRP", "DruidenRP", "MagierRP"}
 local selected = "RPChatMod"
 local main, controls = nil, {}
 local function db()
@@ -66,7 +66,7 @@ local refresh
 local function create()
     if main then return end
     main=CreateFrame("Frame","RPControlCenterFrame",UIParent,"BasicFrameTemplateWithInset")
-    main:SetSize(650,640);main:SetPoint("CENTER")
+    main:SetSize(650,705);main:SetPoint("CENTER")
     main:SetMovable(true);main:EnableMouse(true)
     main:RegisterForDrag("LeftButton");main:SetScript("OnDragStart",main.StartMoving);main:SetScript("OnDragStop",main.StopMovingOrSizing)
     main.TitleText:SetText("RP Control Center 0.2.0")
@@ -76,7 +76,7 @@ local function create()
     makeText(main,"AddOn",20,-45)
     controls.selectAddon=dropdown(main,120,-44,200,{
         {"RPChatMod","RPChatMod"},{"HexerRP","HexerRP"},{"PaladinRP","PaladinRP"},
-        {"JaegerRP","JaegerRP"},{"DruidenRP","DruidenRP"}
+        {"JaegerRP","JaegerRP"},{"DruidenRP","DruidenRP"},{"MagierRP","MagierRP"}
     },function(v) selected=v;refresh() end)
     controls.status=makeText(main,"",20,-88,560)
     controls.output=checkbox(main,"RP-Textausgabe aktiv",20,-123,function(enabled)
@@ -145,6 +145,20 @@ local function create()
         if not a or type(a.TryAmbient)~="function" then info("Ambient nicht verfuegbar.");return end
         if not a.TryAmbient(nil,true) then info("Ambient-Ausgabe blockiert: Klasse, Kampf, Cooldown oder deaktiviert.") end
     end)
+    makeText(main,"Magier: volkstypische Zaubertexte",20,-605,300)
+    controls.mageRaceValue=makeText(main,"--",305,-605,70)
+    controls.mageRaceMinus=button(main,"- 10 %",390,-600,85,function()
+        local a=current()
+        if selected~="MagierRP" or not a or type(a.db.racialTextChance)~="number" then return end
+        setSetting("racialTextChance",math.max(0,a.db.racialTextChance-10))
+        refresh()
+    end)
+    controls.mageRacePlus=button(main,"+ 10 %",480,-600,85,function()
+        local a=current()
+        if selected~="MagierRP" or not a or type(a.db.racialTextChance)~="number" then return end
+        setSetting("racialTextChance",math.min(100,a.db.racialTextChance+10))
+        refresh()
+    end)
     controls.statusButton=button(main,"Sprachstatus",390,-572,150,function()
         local a=_G.RPChatMod
         if a and a.ready and a.HandleCommand then a.HandleCommand("languagestatus")
@@ -179,6 +193,10 @@ refresh=function()
     controls.ambientCombat:SetEnabled(ambientAvailable)
     controls.ambientChance:SetText(ambientAvailable and ("Ambient-Chance: "..tostring(d.ambientChance).." %") or "Ambient-Chance: --")
     controls.ambientInterval:SetText(ambientAvailable and ("Intervall: "..d.ambientMinInterval.." bis "..d.ambientMaxInterval.." Sekunden") or "Intervall: --")
+    local mage = present and selected=="MagierRP" and type(d.racialTextChance)=="number"
+    controls.mageRaceValue:SetText(mage and (tostring(d.racialTextChance).." %") or "--")
+    controls.mageRaceMinus:SetEnabled(mage)
+    controls.mageRacePlus:SetEnabled(mage)
     controls.debug:SetChecked(db().debug)
     -- Disable protected choices when the chosen addon is unavailable.
     controls.output:SetEnabled(present)
