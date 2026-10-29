@@ -22,7 +22,9 @@ local function showTab(which)
         for _, entry in ipairs(entries) do
             local widget = entry.widget
             widget:ClearAllPoints()
-            widget:SetPoint(entry.point, entry.relative, entry.relativePoint, entry.x, entry.y + (tabOffsets[tab] or 0))
+            local offset = tabOffsets[tab] or 0
+            if tab == "class" and entry.y > -500 then offset = 130 end
+            widget:SetPoint(entry.point, entry.relative, entry.relativePoint, entry.x, entry.y + offset)
             if tab == which then widget:Show() else widget:Hide() end
         end
     end
@@ -224,7 +226,7 @@ local function create()
         setSetting("racialTextChance",math.min(100,a.db.racialTextChance+10))
         refresh()
     end)
-    controls.statusButton=button(main,"Sprachstatus",390,-572,150,function()
+    controls.statusButton=button(main,"Sprachstatus",390,-700,150,function()
         local a=_G.RPChatMod
         if a and a.ready and a.HandleCommand then a.HandleCommand("languagestatus")
         else info("RPChatMod ist nicht geladen") end
