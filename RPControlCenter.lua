@@ -158,7 +158,7 @@ local function create()
         setSetting("nativeEmotes",v);refresh()
     end)
     buildingTab = "general"
-    controls.debug=checkbox(main,"Diagnosemeldungen bei Aenderungen",20,-392,function(v)
+    controls.debug,controls.debugLabel=checkbox(main,"Diagnosemeldungen bei Aenderungen",20,-392,function(v)
         db().debug=v;refresh()
     end)
     buildingTab = "ambient"
@@ -187,6 +187,28 @@ local function create()
         if not a or type(a.TryAmbient)~="function" then info("Ambient nicht verfuegbar.");return end
         if not a.TryAmbient(nil,true) then info("Ambient-Ausgabe blockiert: Klasse, Kampf, Cooldown oder deaktiviert.") end
     end)
+    controls.intervalHint=makeText(main,"Intervall aendern (je 30 Sek.):",20,-588,240)
+    local function adjustInterval(which, delta)
+        local a=current()
+        if not a or type(a.db.ambientMinInterval) ~= "number" or type(a.db.ambientMaxInterval) ~= "number" then return end
+        local lower = math.floor(a.db.ambientMinInterval)
+        local upper = math.floor(a.db.ambientMaxInterval)
+        if which == "min" then
+            lower = math.max(30, math.min(3600, lower + delta))
+            if lower > upper then upper = lower end
+        else
+            upper = math.max(30, math.min(7200, upper + delta))
+            if upper < lower then lower = upper end
+        end
+        setSetting("ambientMinInterval",lower)
+        setSetting("ambientMaxInterval",upper)
+        if type(a.ResetAmbientTimer) == "function" then a.ResetAmbientTimer() end
+        refresh()
+    end
+    controls.minDown=button(main,"Min -30",245,-583,86,function() adjustInterval("min",-30) end)
+    controls.minUp=button(main,"Min +30",335,-583,86,function() adjustInterval("min",30) end)
+    controls.maxDown=button(main,"Max -30",425,-583,86,function() adjustInterval("max",-30) end)
+    controls.maxUp=button(main,"Max +30",515,-583,86,function() adjustInterval("max",30) end)
     buildingTab = "class"
     controls.mageLabel=makeText(main,"Magier: volkstypische Zaubertexte",20,-605,300)
     controls.mageRaceValue=makeText(main,"--",305,-605,70)
@@ -218,7 +240,8 @@ local function create()
     button(main,"Klasse",300,-116,130,function() showTab("class") end)
     -- The diagnostic toggle belongs to the general page, not to Ambient.
     for _, entry in ipairs(tabRegions.general) do
-        if entry.widget == controls.debug then entry.y = -360 end
+        if entry.widget == controls.debug then entry.y = -335 end
+        if entry.widget == controls.debugLabel then entry.y = -341 end
     end
     showTab(activeTab)
 end
@@ -245,6 +268,7 @@ refresh=function()
     controls.ambientCombat:SetEnabled(ambientAvailable)
     controls.ambientChance:SetText(ambientAvailable and ("Ambient-Chance: "..tostring(d.ambientChance).." %") or "Ambient-Chance: --")
     controls.ambientInterval:SetText(ambientAvailable and ("Intervall: "..tostring(d.ambientMinInterval).." bis "..tostring(d.ambientMaxInterval).." Sekunden") or "Intervall: --")
+    for _, b in ipairs({controls.minDown,controls.minUp,controls.maxDown,controls.maxUp}) do b:SetEnabled(ambientAvailable) end
     local mage = present and selected=="MagierRP" and type(d.racialTextChance)=="number"
     controls.mageRaceValue:SetText(mage and (tostring(d.racialTextChance).." %") or "--")
     controls.mageRaceMinus:SetEnabled(mage)
