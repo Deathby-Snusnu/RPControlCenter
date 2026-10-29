@@ -18,6 +18,8 @@ class ControlCenterTabs(unittest.TestCase):
             self.assertIn(token, SOURCE)
         self.assertIn('math.min(3600', SOURCE)
         self.assertIn('math.min(7200', SOURCE)
+        self.assertIn('local lower = math.max(30, math.min(3600, math.floor(a.db.ambientMinInterval)))', SOURCE)
+        self.assertIn('local upper = math.max(30, math.min(7200, math.floor(a.db.ambientMaxInterval)))', SOURCE)
 
     def test_paladin_is_untouched(self):
         self.assertIn('{"PaladinRP","PaladinRP"}', SOURCE)

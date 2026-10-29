@@ -193,8 +193,8 @@ local function create()
     local function adjustInterval(which, delta)
         local a=current()
         if not a or type(a.db.ambientMinInterval) ~= "number" or type(a.db.ambientMaxInterval) ~= "number" then return end
-        local lower = math.floor(a.db.ambientMinInterval)
-        local upper = math.floor(a.db.ambientMaxInterval)
+        local lower = math.max(30, math.min(3600, math.floor(a.db.ambientMinInterval)))
+        local upper = math.max(30, math.min(7200, math.floor(a.db.ambientMaxInterval)))
         if which == "min" then
             lower = math.max(30, math.min(3600, lower + delta))
             if lower > upper then upper = lower end
