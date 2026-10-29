@@ -4,6 +4,39 @@ local addonName = ...
 local names = {"RPChatMod", "HexerRP", "PaladinRP", "JaegerRP", "DruidenRP", "MagierRP"}
 local selected = "RPChatMod"
 local main, controls = nil, {}
+local activeTab = "general"
+local buildingTab = nil
+local tabRegions = {general={}, ambient={}, class={}}
+local function trackRegion(region)
+    if region and buildingTab then
+        local point, relative, relativePoint, x, y = region:GetPoint(1)
+        if point and relative then
+            table.insert(tabRegions[buildingTab], {widget=region, point=point, relative=relative, relativePoint=relativePoint, x=x, y=y})
+        end
+    end
+end
+local tabOffsets = {general=-25, ambient=275, class=440}
+local function showTab(which)
+    activeTab = which
+    for tab, entries in pairs(tabRegions) do
+        for _, entry in ipairs(entries) do
+            local widget = entry.widget
+            widget:ClearAllPoints()
+            widget:SetPoint(entry.point, entry.relative, entry.relativePoint, entry.x, entry.y + (tabOffsets[tab] or 0))
+            if tab == which then widget:Show() else widget:Hide() end
+        end
+    end
+    if controls.raceLabel then
+        local mage = selected == "MagierRP"
+        local rc = selected == "RPChatMod"
+        for _, entry in ipairs(tabRegions.class) do
+            local isMage = entry.widget == controls.mageLabel or entry.widget == controls.mageRaceValue or entry.widget == controls.mageRaceMinus or entry.widget == controls.mageRacePlus
+            local isRC = entry.widget == controls.raceLabel or entry.widget == controls.raceFrame or entry.widget == controls.group or entry.widget == controls.groupLabel or entry.widget == controls.native or entry.widget == controls.nativeLabel or entry.widget == controls.statusButton
+            if which == "class" and ((isMage and mage) or (isRC and rc)) then entry.widget:Show()
+            elseif which == "class" and (isMage or isRC) then entry.widget:Hide() end
+        end
+    end
+end
 local function db()
     RPControlCenter_CharacterDB = type(RPControlCenter_CharacterDB) == "table" and RPControlCenter_CharacterDB or {}
     local data = RPControlCenter_CharacterDB
@@ -23,12 +56,14 @@ local function makeText(parent, text, x,y, width)
     local label = parent:CreateFontString(nil,"OVERLAY","GameFontNormal")
     label:SetPoint("TOPLEFT",parent,"TOPLEFT",x,y)
     label:SetWidth(width or 280); label:SetJustifyH("LEFT");label:SetText(text)
+    trackRegion(label)
     return label
 end
 local function button(parent, text, x,y,w, fn)
     local b=CreateFrame("Button",nil,parent,"UIPanelButtonTemplate")
     b:SetSize(w or 135,24);b:SetPoint("TOPLEFT",parent,"TOPLEFT",x,y)
     b:SetText(text);b:SetScript("OnClick",fn)
+    trackRegion(b)
     return b
 end
 local function setSetting(key, value)
@@ -53,20 +88,23 @@ local function dropdown(parent,x,y,width,options,onPick)
             UIDropDownMenu_AddButton(item,level)
         end
     end)
-    return function(value) UIDropDownMenu_SetSelectedValue(d,value);UIDropDownMenu_SetText(d, (function() for _,o in ipairs(options) do if o[1]==value then return o[2] end end return tostring(value) end)()) end
+    trackRegion(d)
+    local setter = function(value) UIDropDownMenu_SetSelectedValue(d,value);UIDropDownMenu_SetText(d, (function() for _,o in ipairs(options) do if o[1]==value then return o[2] end end return tostring(value) end)()) end
+    return setter, d
 end
 local function checkbox(parent,text,x,y,fn)
     local c=CreateFrame("CheckButton",nil,parent,"UICheckButtonTemplate")
     c:SetPoint("TOPLEFT",parent,"TOPLEFT",x,y);c:SetSize(28,28)
     local label=makeText(parent,text,x+32,y-6,300)
     c:SetScript("OnClick",function(self) fn(self:GetChecked() and true or false) end)
+    trackRegion(c)
     return c,label
 end
 local refresh
 local function create()
     if main then return end
     main=CreateFrame("Frame","RPControlCenterFrame",UIParent,"BasicFrameTemplateWithInset")
-    main:SetSize(650,705);main:SetPoint("CENTER")
+    main:SetSize(650,465);main:SetPoint("CENTER")
     main:SetMovable(true);main:EnableMouse(true)
     main:RegisterForDrag("LeftButton");main:SetScript("OnDragStart",main.StartMoving);main:SetScript("OnDragStop",main.StopMovingOrSizing)
     main.TitleText:SetText("RP Control Center 0.2.0")
@@ -79,6 +117,7 @@ local function create()
         {"JaegerRP","JaegerRP"},{"DruidenRP","DruidenRP"},{"MagierRP","MagierRP"}
     },function(v) selected=v;refresh() end)
     controls.status=makeText(main,"",20,-88,560)
+    buildingTab = "general"
     controls.output=checkbox(main,"RP-Textausgabe aktiv",20,-123,function(enabled)
         local addon=current();if not addon then return end
         local memory=db().previousChance
@@ -109,17 +148,20 @@ local function create()
         {"SAY","Sagen"},{"YELL","Schreien"},{"PARTY","Gruppe"},
         {"RAID","Schlachtzug"},{"INSTANCE_CHAT","Instanz"},{"AUTO","Automatisch"},{"GROUP","Gruppenkanal"}
     },function(v)setSetting("chatChannel",v);refresh() end)
+    buildingTab = "class"
     controls.raceLabel=makeText(main,"Volkssprache (nur RPChatMod)",20,-290,235)
-    controls.race=dropdown(main,275,-286,165,{{"auto","Automatisch"},{"on","Erzwingen"},{"off","Aus"}},function(v)setSetting("racialLanguageMode",v);refresh() end)
-    controls.group=checkbox(main,"Gruppensprache verwenden (nur RPChatMod)",20,-326,function(v)
+    controls.race,controls.raceFrame=dropdown(main,275,-286,165,{{"auto","Automatisch"},{"on","Erzwingen"},{"off","Aus"}},function(v)setSetting("racialLanguageMode",v);refresh() end)
+    controls.group,controls.groupLabel=checkbox(main,"Gruppensprache verwenden (nur RPChatMod)",20,-326,function(v)
         setSetting("groupLanguageMode",v and "on" or "off");refresh()
     end)
-    controls.native=checkbox(main,"Native WoW-Emotes (nur RPChatMod)",20,-359,function(v)
+    controls.native,controls.nativeLabel=checkbox(main,"Native WoW-Emotes (nur RPChatMod)",20,-359,function(v)
         setSetting("nativeEmotes",v);refresh()
     end)
+    buildingTab = "general"
     controls.debug=checkbox(main,"Diagnosemeldungen bei Aenderungen",20,-392,function(v)
         db().debug=v;refresh()
     end)
+    buildingTab = "ambient"
     controls.ambientLabel=makeText(main,"Ambient-System (Hexer/Jäger/Paladin/Druide/Magier)",20,-431,520)
     controls.ambient=checkbox(main,"Ambient aktiviert",20,-458,function(value)
         local a=current(); if not a or type(a.db.ambientEnabled) ~= "boolean" then return end
@@ -145,7 +187,8 @@ local function create()
         if not a or type(a.TryAmbient)~="function" then info("Ambient nicht verfuegbar.");return end
         if not a.TryAmbient(nil,true) then info("Ambient-Ausgabe blockiert: Klasse, Kampf, Cooldown oder deaktiviert.") end
     end)
-    makeText(main,"Magier: volkstypische Zaubertexte",20,-605,300)
+    buildingTab = "class"
+    controls.mageLabel=makeText(main,"Magier: volkstypische Zaubertexte",20,-605,300)
     controls.mageRaceValue=makeText(main,"--",305,-605,70)
     controls.mageRaceMinus=button(main,"- 10 %",390,-600,85,function()
         local a=current()
@@ -164,11 +207,20 @@ local function create()
         if a and a.ready and a.HandleCommand then a.HandleCommand("languagestatus")
         else info("RPChatMod ist nicht geladen") end
     end)
-    button(main,"Hilfe",20,-572,90,function()
+    buildingTab = nil
+    button(main,"Hilfe",20,-420,90,function()
         info("/rpconfig zeigt die GUI. Einstellungen werden pro Charakter gespeichert.")
         info("0% Textchance unterdrueckt Texte, nicht unbedingt Emote-Animationen.")
         info("Debug protokolliert Aenderungen im Control Center; kein globales AddOn-Log.")
     end)
+    button(main,"Allgemein",20,-116,130,function() showTab("general") end)
+    button(main,"Ambient",160,-116,130,function() showTab("ambient") end)
+    button(main,"Klasse",300,-116,130,function() showTab("class") end)
+    -- The diagnostic toggle belongs to the general page, not to Ambient.
+    for _, entry in ipairs(tabRegions.general) do
+        if entry.widget == controls.debug then entry.y = -360 end
+    end
+    showTab(activeTab)
 end
 refresh=function()
     if not main then return end
@@ -198,6 +250,7 @@ refresh=function()
     controls.mageRaceMinus:SetEnabled(mage)
     controls.mageRacePlus:SetEnabled(mage)
     controls.debug:SetChecked(db().debug)
+    showTab(activeTab)
     -- Disable protected choices when the chosen addon is unavailable.
     controls.output:SetEnabled(present)
     controls.group:SetEnabled(rc)
