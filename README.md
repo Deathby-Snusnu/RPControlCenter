@@ -17,7 +17,7 @@ Kopiere `RPControlCenter` neben die gewünschten Text-AddOns in
 - Ambient: aktivieren, Kampf-Freigabe, Chance in 10-Prozent-Schritten,
   Intervalländerung in 30-Sekunden-Schritten und Test für unterstützte
   Ambient-AddOns. Die Intervalle lassen sich auch über die Slash-Befehle
-  der jeweiligen AddOns setzen. Details stehen in [AMBIENT.md](AMBIENT.md).
+  der jeweiligen AddOns setzen. Details stehen in [AMBIENT.md](https://github.com/Deathby-Snusnu/RPAddOns/blob/main/docs/AMBIENT.md).
 - Diagnose: meldet **nur Einstellungsänderungen durch das Control Center**, kein systemweites Debugging.
 - Sprachstatus: ruft die bestehende Diagnose `/rc languagestatus` auf.
 
@@ -34,9 +34,9 @@ MagierRP erscheint in der AddOn-Auswahl. Für ein geladenes MagierRP gibt es die
 Einstellung **volkstypische Zaubertexte** (0 bis 100 % in Schritten von 10 %).
 Diese Änderung wird pro Charakter in den MagierRP-SavedVariables gespeichert.
 Ohne geladenes und bereites MagierRP ist diese Einstellung deaktiviert.
-Die Kanalauswahl wird für MagierRP ausgeblendet. Dessen manuelles Ambient-RP
-hat keine Aktivierungs-, Kampf-, Chancen- oder Intervallfelder des
-Timer-Systems; der Testknopf ruft `TryAmbient` auf. Die Integration benötigt
+MagierRP unterstützt den Ausgabekanal `chatChannel` und das konfigurierbare
+Ambient-System mit Aktivierung, Kampf-Freigabe, Chance, Intervall und Test.
+Die passenden Felder werden angezeigt, wenn MagierRP geladen und bereit ist. Die Integration benötigt
 `racialTextChance` in der Charakterdatenbank und `_G.MagierRP`. Ein
 Client-Test bleibt erforderlich.
 
@@ -57,7 +57,7 @@ AddOns. Im Spiel persistiert WoW SavedVariables beim Ausloggen/Reload.
 
 ## Test im Spiel
 
-1. `/rpconfig`, die sechs auswählbaren Text-AddOns durchschalten.
+1. `/rpconfig`, die sechs auswählbaren Text-AddOns durchschalten, insbesondere MagierRP und seine Kanalauswahl.
 2. RPChatMod: Volkssprache `auto`, Gruppensprache aktivieren, mit `/rc languagestatus` testen.
 3. RP-Ausgabe deaktivieren, Chat-Text kontrollieren und anschließend wieder aktivieren.
 4. `/reload`, gespeicherte Werte kontrollieren.
