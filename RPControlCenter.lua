@@ -258,13 +258,6 @@ refresh=function()
     controls.chanceValue:SetText(present and (tostring(d.textChance).." %") or "--")
     controls.lang(d.outputLanguage or "deDE")
     controls.channel(d.chatChannel or "SAY")
-    if selected=="MagierRP" then
-        controls.channelLabel:Hide()
-        controls.channelFrame:Hide()
-    else
-        controls.channelLabel:Show()
-        controls.channelFrame:Show()
-    end
     local rc=present and selected=="RPChatMod"
     controls.race(d.racialLanguageMode or "auto")
     controls.group:SetChecked(rc and d.groupLanguageMode=="on")
