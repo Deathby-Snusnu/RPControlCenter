@@ -18,5 +18,12 @@ class MageControlTests(unittest.TestCase):
         self.assertIn('controls.mageRaceMinus:SetEnabled(mage)', SOURCE)
         self.assertIn('controls.mageRacePlus:SetEnabled(mage)', SOURCE)
 
+    def test_output_channel_hidden_for_mage(self):
+        self.assertIn('controls.channelLabel=makeText(main,"Ausgabekanal"', SOURCE)
+        self.assertIn('controls.channel,controls.channelFrame=dropdown', SOURCE)
+        self.assertIn('if selected=="MagierRP" then', SOURCE)
+        self.assertIn('controls.channelLabel:Hide()', SOURCE)
+        self.assertIn('controls.channelFrame:Hide()', SOURCE)
+
 if __name__ == "__main__":
     unittest.main()

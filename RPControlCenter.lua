@@ -145,8 +145,8 @@ local function create()
     end)
     makeText(main,"Textsprache",20,-211)
     controls.lang=dropdown(main,170,-207,155,{{"deDE","Deutsch"},{"enUS","English"},{"frFR","Francais"}},function(v)setSetting("outputLanguage",v);refresh() end)
-    makeText(main,"Ausgabekanal",20,-250)
-    controls.channel=dropdown(main,170,-246,155,{
+    controls.channelLabel=makeText(main,"Ausgabekanal",20,-250)
+    controls.channel,controls.channelFrame=dropdown(main,170,-246,155,{
         {"SAY","Sagen"},{"YELL","Schreien"},{"PARTY","Gruppe"},
         {"RAID","Schlachtzug"},{"INSTANCE_CHAT","Instanz"},{"AUTO","Automatisch"},{"GROUP","Gruppenkanal"}
     },function(v)setSetting("chatChannel",v);refresh() end)
@@ -258,6 +258,13 @@ refresh=function()
     controls.chanceValue:SetText(present and (tostring(d.textChance).." %") or "--")
     controls.lang(d.outputLanguage or "deDE")
     controls.channel(d.chatChannel or "SAY")
+    if selected=="MagierRP" then
+        controls.channelLabel:Hide()
+        controls.channelFrame:Hide()
+    else
+        controls.channelLabel:Show()
+        controls.channelFrame:Show()
+    end
     local rc=present and selected=="RPChatMod"
     controls.race(d.racialLanguageMode or "auto")
     controls.group:SetChecked(rc and d.groupLanguageMode=="on")
