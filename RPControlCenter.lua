@@ -53,7 +53,7 @@ local function dropdown(parent,x,y,width,options,onPick)
             UIDropDownMenu_AddButton(item,level)
         end
     end)
-    return function(value) UIDropDownMenu_SetSelectedValue(d,value);UIDropDownMenu_SetText(d, (function() for _,o in ipairs(options) do if o[1]==value then return o[2] end end return tostring(value) end)()),d
+    return function(value) UIDropDownMenu_SetSelectedValue(d,value);UIDropDownMenu_SetText(d, (function() for _,o in ipairs(options) do if o[1]==value then return o[2] end end return tostring(value) end)()) end,d
 end
 local function checkbox(parent,text,x,y,fn)
     local c=CreateFrame("CheckButton",nil,parent,"UICheckButtonTemplate")
