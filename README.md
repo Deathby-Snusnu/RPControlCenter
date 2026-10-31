@@ -17,7 +17,7 @@ Kopiere `RPControlCenter` neben die gewünschten Text-AddOns in
 - Ambient: aktivieren, Kampf-Freigabe, Chance in 10-Prozent-Schritten,
   Intervalländerung in 30-Sekunden-Schritten und Test für unterstützte
   Ambient-AddOns. Die Intervalle lassen sich auch über die Slash-Befehle
-  der jeweiligen AddOns setzen. Details stehen in [AMBIENT.md](https://github.com/Deathby-Snusnu/RPAddOns/blob/main/docs/AMBIENT.md).
+  der jeweiligen AddOns setzen. Details stehen in [AMBIENT.md](https://github.com/Deathby-Snusnu/RPAddOns/blob/main/docs/AMBIENT-HANDBUCH.md).
 - Diagnose: meldet **nur Einstellungsänderungen durch das Control Center**, kein systemweites Debugging.
 - Sprachstatus: ruft die bestehende Diagnose `/rc languagestatus` auf.
 
