@@ -1,5 +1,5 @@
 -- SPDX-License-Identifier: MPL-2.0
--- RP Control Center 0.2.0. Separate GUI; no modifications to other addons.
+-- RP Control Center 0.3.0. Separate GUI; no modifications to other addons.
 local addonName = ...
 local names = {"RPChatMod", "HexerRP", "PaladinRP", "JaegerRP", "DruidenRP", "MagierRP"}
 local selected = "RPChatMod"
@@ -109,7 +109,7 @@ local function create()
     main:SetSize(650,465);main:SetPoint("CENTER")
     main:SetMovable(true);main:EnableMouse(true)
     main:RegisterForDrag("LeftButton");main:SetScript("OnDragStart",main.StartMoving);main:SetScript("OnDragStop",main.StopMovingOrSizing)
-    main.TitleText:SetText("RP Control Center 0.2.0")
+    main.TitleText:SetText("RP Control Center 0.3.0")
     main:SetClampedToScreen(true)
     main:Hide()
     main:SetScript("OnShow",function() if refresh then refresh() end end)

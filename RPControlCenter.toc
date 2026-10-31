@@ -2,7 +2,7 @@
 ## Title: RP Control Center
 ## Notes: Zentrale Ingame-Konfiguration der RP-AddOns
 ## Author: Hannes
-## Version: 0.2.0
+## Version: 0.3.0
 ## SavedVariablesPerCharacter: RPControlCenter_CharacterDB
 ## OptionalDeps: RPChatMod, HexerRP, PaladinRP, JaegerRP, DruidenRP
 

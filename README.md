@@ -1,10 +1,12 @@
-# RP Control Center 0.2.0
+# RP Control Center 0.3.0
 
 Zentrales Ingame-Fenster für RPChatMod, HexerRP, PaladinRP, JaegerRP, DruidenRP und MagierRP (sobald installiert).
 
 ## Installation
 
-Kopiere `RPControlCenter` neben die fünf anderen AddOn-Ordner in `Interface/AddOns`. Aktiviere es in der AddOn-Auswahl. Öffne es mit `/rpconfig` oder `/rpcc`.
+Kopiere `RPControlCenter` neben die gewünschten Text-AddOns in
+`Interface/AddOns`. Aktiviere es in der AddOn-Auswahl. Öffne es mit
+`/rpconfig` oder `/rpcc`; die anderen AddOns sind optional.
 
 ## Einstellungen
 
@@ -13,36 +15,49 @@ Kopiere `RPControlCenter` neben die fünf anderen AddOn-Ordner in `Interface/Add
 - Textchance: ±10 Prozentpunkte; Textsprache: `outputLanguage`; Ausgabekanal: `chatChannel`.
 - RPChatMod: `racialLanguageMode` (`auto/on/off`), `groupLanguageMode` (`on/off`), `nativeEmotes`.
 - Ambient: aktivieren, Kampf-Freigabe, Chance in 10-Prozent-Schritten,
-  Intervallanzeige und Test für unterstützte Ambient-AddOns. Das Intervall
-  wird weiterhin über den Slash-Befehl des jeweiligen AddOns eingestellt.
-  Details stehen in
-  [AMBIENT.md](AMBIENT.md).
+  Intervalländerung in 30-Sekunden-Schritten und Test für unterstützte
+  Ambient-AddOns. Die Intervalle lassen sich auch über die Slash-Befehle
+  der jeweiligen AddOns setzen. Details stehen in [AMBIENT.md](AMBIENT.md).
 - Diagnose: meldet **nur Einstellungsänderungen durch das Control Center**, kein systemweites Debugging.
 - Sprachstatus: ruft die bestehende Diagnose `/rc languagestatus` auf.
 
-Die Optionen der fünf AddOns bleiben in ihren ursprünglichen `SavedVariablesPerCharacter` gespeichert. Das Control Center speichert nur Diagnosemodus und zuletzt verwendete Textchancen in `RPControlCenter_CharacterDB`. Änderungen über Slash-Befehle werden beim erneuten Öffnen aktualisiert.
+Die Optionen der ausgewählten Text-AddOns bleiben in ihren ursprünglichen
+`SavedVariablesPerCharacter` gespeichert. Das Control Center speichert nur
+Diagnosemodus und zuletzt verwendete Textchancen in
+`RPControlCenter_CharacterDB`. Änderungen über Slash-Befehle werden beim
+erneuten Öffnen aktualisiert. Die Bereiche heißen **Allgemein**, **Ambient**
+und **Klasse**.
 
 ## MagierRP
 
 MagierRP erscheint in der AddOn-Auswahl. Für ein geladenes MagierRP gibt es die
 Einstellung **volkstypische Zaubertexte** (0 bis 100 % in Schritten von 10 %).
 Diese Änderung wird pro Charakter in den MagierRP-SavedVariables gespeichert.
-Ohne installiertes/geladenes MagierRP sind die Bedienelemente deaktiviert.
-Die MagierRP-Integration benötigt eine MagierRP-Version, die `racialTextChance`
-in ihrer Charakterdatenbank und `_G.MagierRP` bereitstellt (parallel im
-RPTextStudio-PR #34). Der Client-Test steht noch aus.
+Ohne geladenes und bereites MagierRP ist diese Einstellung deaktiviert.
+Die Kanalauswahl wird für MagierRP ausgeblendet. Dessen manuelles Ambient-RP
+hat keine Aktivierungs-, Kampf-, Chancen- oder Intervallfelder des
+Timer-Systems; der Testknopf ruft `TryAmbient` auf. Die Integration benötigt
+`racialTextChance` in der Charakterdatenbank und `_G.MagierRP`. Ein
+Client-Test bleibt erforderlich.
 
 ## Grenzen
 
-Dies ist eine erste WoW-Forever-16001-GUI. Nicht alle Bedienelemente sind deaktiviert, wenn ein AddOn fehlt (Textlisten werden jedoch nicht verändert). Die Spracheinstellung für die Ausgabe ist **nicht** die WoW-Volkssprache. `GROUP` als Kanal wird nur angeboten, wenn das jeweilige AddOn ihn unterstützt. Keine automatische Zaubererkennung, keine Textbearbeitung, kein automatisches globales Debug-Logging.
+Dies ist eine erste WoW-Forever-16001-GUI. Nicht alle Bedienelemente sind
+deaktiviert, wenn ein AddOn fehlt. Die Textsprache ist **nicht** die
+WoW-Volkssprache. Die Kanalliste zeigt `GROUP` auch bei AddOns an, die diesen
+Wert nicht unterstützen; `GROUP` nur für RPChatMod verwenden und ansonsten
+die gültigen Kanäle der jeweiligen AddOn-README beachten. Keine automatische
+Zaubererkennung, Textbearbeitung oder automatisches globales Debug-Logging.
 
 ## Backup
 
-Vor der Installation vorhandene AddOn-Ordner und den `WTF`-Ordner sichern. Das Gesamtpaket wird als neue ZIP geliefert; die bestehenden Quellcodedateien der fünf AddOns werden nicht geändert. Im Spiel persistiert WoW SavedVariables beim Ausloggen/Reload.
+Vor der Installation vorhandene AddOn-Ordner und den `WTF`-Ordner sichern.
+Das Control Center ändert keine Textlisten oder Quellcodedateien der anderen
+AddOns. Im Spiel persistiert WoW SavedVariables beim Ausloggen/Reload.
 
 ## Test im Spiel
 
-1. `/rpconfig`, alle fünf AddOns durchschalten.
+1. `/rpconfig`, die sechs auswählbaren Text-AddOns durchschalten.
 2. RPChatMod: Volkssprache `auto`, Gruppensprache aktivieren, mit `/rc languagestatus` testen.
 3. RP-Ausgabe deaktivieren, Chat-Text kontrollieren und anschließend wieder aktivieren.
 4. `/reload`, gespeicherte Werte kontrollieren.

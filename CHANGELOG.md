@@ -1,5 +1,17 @@
 # Changelog
 
+## Aktueller Quellstand: 0.3.0 (unveröffentlicht)
+
+- Die Oberfläche bietet Bereiche für allgemeine, Ambient- und
+  klassenspezifische Einstellungen.
+- MagierRP ist auswählbar; seine Wahrscheinlichkeit für volkstypische
+  Zaubertexte kann in 10-Prozent-Schritten geändert werden.
+- Unterstützte Ambient-Intervalle lassen sich auch im Fenster in
+  30-Sekunden-Schritten anpassen.
+- Ambient-Timer werden nach einer Intervalländerung neu gestartet.
+- Die Kanalauswahl wird für MagierRP ausgeblendet, da das AddOn diese
+  Einstellung nicht unterstützt.
+
 ## 0.1.0 (2026-10-20)
 
 - Eigenständiges Ingame-Optionsfenster und `/rpconfig`/`/rpcc`.
