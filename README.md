@@ -1,6 +1,6 @@
 # RP Control Center 0.3.0
 
-Zentrales Ingame-Fenster für RPChatMod, HexerRP, PaladinRP, JaegerRP, DruidenRP und MagierRP (sobald installiert).
+Zentrales Ingame-Fenster für RPChatMod, HexerRP, PaladinRP, JaegerRP, DruidenRP MagierRP und KriegerRP (sobald installiert).
 
 ## Installation
 
@@ -66,3 +66,13 @@ AddOns. Im Spiel persistiert WoW SavedVariables beim Ausloggen/Reload.
 ## Lizenz
 
 Code MPL-2.0, siehe `LICENSE`.
+
+## KriegerRP
+
+KriegerRP erscheint in der AddOn-Auswahl, sobald es installiert und geladen
+ist. Unter **Klasse** kann dieselbe volkstypische Textchance wie beim Magier
+geändert werden. Sprache, Chatkanal, Textchance und Cooldown bleiben
+charakterbezogene Einstellungen in `KriegerRP_CharacterDB`.
+
+KriegerRP befindet sich vorerst als eigenständiger AddOn-Ordner im
+Sammelrepository RPAddOns, noch nicht als separates GitHub-Repository.
