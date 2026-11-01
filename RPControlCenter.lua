@@ -1,7 +1,7 @@
 -- SPDX-License-Identifier: MPL-2.0
 -- RP Control Center 0.3.0. Separate GUI; no modifications to other addons.
 local addonName = ...
-local names = {"RPChatMod", "HexerRP", "PaladinRP", "JaegerRP", "DruidenRP", "MagierRP"}
+local names = {"RPChatMod", "HexerRP", "PaladinRP", "JaegerRP", "DruidenRP", "MagierRP", "KriegerRP"}
 local selected = "RPChatMod"
 local main, controls = nil, {}
 local activeTab = "general"
@@ -29,7 +29,7 @@ local function showTab(which)
         end
     end
     if controls.raceLabel then
-        local mage = selected == "MagierRP"
+        local mage = (selected == "MagierRP" or selected == "KriegerRP")
         local rc = selected == "RPChatMod"
         for _, entry in ipairs(tabRegions.class) do
             local isMage = entry.widget == controls.mageLabel or entry.widget == controls.mageRaceValue or entry.widget == controls.mageRaceMinus or entry.widget == controls.mageRacePlus
@@ -116,7 +116,7 @@ local function create()
     makeText(main,"AddOn",20,-45)
     controls.selectAddon=dropdown(main,120,-44,200,{
         {"RPChatMod","RPChatMod"},{"HexerRP","HexerRP"},{"PaladinRP","PaladinRP"},
-        {"JaegerRP","JaegerRP"},{"DruidenRP","DruidenRP"},{"MagierRP","MagierRP"}
+        {"JaegerRP","JaegerRP"},{"DruidenRP","DruidenRP"},{"MagierRP","MagierRP"},{"KriegerRP","KriegerRP"}
     },function(v) selected=v;refresh() end)
     controls.status=makeText(main,"",20,-88,560)
     buildingTab = "general"
@@ -216,13 +216,13 @@ local function create()
     controls.mageRaceValue=makeText(main,"--",305,-605,70)
     controls.mageRaceMinus=button(main,"- 10 %",390,-600,85,function()
         local a=current()
-        if selected~="MagierRP" or not a or type(a.db.racialTextChance)~="number" then return end
+        if (selected~="MagierRP" and selected~="KriegerRP") or not a or type(a.db.racialTextChance)~="number" then return end
         setSetting("racialTextChance",math.max(0,a.db.racialTextChance-10))
         refresh()
     end)
     controls.mageRacePlus=button(main,"+ 10 %",480,-600,85,function()
         local a=current()
-        if selected~="MagierRP" or not a or type(a.db.racialTextChance)~="number" then return end
+        if (selected~="MagierRP" and selected~="KriegerRP") or not a or type(a.db.racialTextChance)~="number" then return end
         setSetting("racialTextChance",math.min(100,a.db.racialTextChance+10))
         refresh()
     end)
@@ -271,7 +271,7 @@ refresh=function()
     controls.ambientChance:SetText(ambientAvailable and ("Ambient-Chance: "..tostring(d.ambientChance).." %") or "Ambient-Chance: --")
     controls.ambientInterval:SetText(ambientAvailable and ("Intervall: "..tostring(d.ambientMinInterval).." bis "..tostring(d.ambientMaxInterval).." Sekunden") or "Intervall: --")
     for _, b in ipairs({controls.minDown,controls.minUp,controls.maxDown,controls.maxUp}) do b:SetEnabled(ambientAvailable) end
-    local mage = present and selected=="MagierRP" and type(d.racialTextChance)=="number"
+    local mage = present and (selected=="MagierRP" or selected=="KriegerRP") and type(d.racialTextChance)=="number"
     controls.mageRaceValue:SetText(mage and (tostring(d.racialTextChance).." %") or "--")
     controls.mageRaceMinus:SetEnabled(mage)
     controls.mageRacePlus:SetEnabled(mage)
