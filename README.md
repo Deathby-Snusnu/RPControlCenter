@@ -77,3 +77,21 @@ charakterbezogene Einstellungen in `KriegerRP_CharacterDB`.
 KriegerRP wird in einem eigenständigen GitHub-Repository entwickelt:
 [Deathby-Snusnu/KriegerRP](https://github.com/Deathby-Snusnu/KriegerRP).
 RPAddOns bindet es als Git-Submodul ein.
+
+### KriegerRP: Ambient und volkstypische Texte
+
+Bei Auswahl von KriegerRP kann die Seite **Klasse** die Chance auf
+volkstypische Texte verändern. Die Seite **Ambient** steuert
+`ambientEnabled`, Kampffreigabe, Chance und Intervall. Ein Reset von
+`KriegerRP.ResetAmbientTimer()` verwirft ausstehende Timerzustände.
+
+**Wichtig:** KriegerRP verwendet ab dem angepassten Stand in
+[KriegerRP PR #1](https://github.com/Deathby-Snusnu/KriegerRP/pull/1)
+dieselbe wartende Ambient-Ausgabe wie die älteren Klassen-AddOns:
+Ein Timer sendet keinen Chat. Der Text erscheint erst anlässlich
+eines aktiv ausgelösten RP-Befehls.
+
+Neue Krieger-Charaktere starten mit 30 % Textchance, 20 Sekunden
+Cooldown und aktivierter Ambient-Vormerkung (180 bis 420 Sekunden).
+Vorhandene SavedVariables werden nicht pauschal überschrieben.
+Siehe das [KriegerRP-Ambient-Handbuch](https://github.com/Deathby-Snusnu/KriegerRP/blob/feature/initial-warrior-addon/AMBIENT.md).
