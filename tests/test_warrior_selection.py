@@ -15,5 +15,12 @@ class WarriorIntegrationTests(unittest.TestCase):
         self.assertIn('selected~="KriegerRP"', code)
         self.assertIn('selected=="KriegerRP"', code)
 
+    def test_disabling_krieger_output_resets_ambient_timer(self):
+        self.assertIn(
+            'selected == "KriegerRP" and key == "textChance" and tonumber(value) == 0',
+            (ROOT / "RPControlCenter.lua").read_text(encoding="utf-8"),
+        )
+        self.assertIn("addon.ResetAmbientTimer()", (ROOT / "RPControlCenter.lua").read_text(encoding="utf-8"))
+
 if __name__ == "__main__":
     unittest.main()

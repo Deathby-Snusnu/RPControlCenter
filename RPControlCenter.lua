@@ -76,6 +76,9 @@ local function setSetting(key, value)
         if not ok then info("Sprache nicht verfuegbar: "..tostring(why));return end
     elseif type(addon.SetSetting)=="function" then addon.SetSetting(key,value)
     else addon.db[key]=value end
+    if selected == "KriegerRP" and key == "textChance" and tonumber(value) == 0 and type(addon.ResetAmbientTimer) == "function" then
+        addon.ResetAmbientTimer()
+    end
     if db().debug then info(selected .. "." .. key .. " = " .. tostring(value)) end
 end
 local function dropdown(parent,x,y,width,options,onPick)
