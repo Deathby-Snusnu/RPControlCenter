@@ -1,7 +1,7 @@
 -- SPDX-License-Identifier: MPL-2.0
 -- RP Control Center 0.3.0. Separate GUI; no modifications to other addons.
 local addonName = ...
-local names = {"RPChatMod", "HexerRP", "PaladinRP", "JaegerRP", "DruidenRP", "MagierRP"}
+local names = {"RPChatMod", "HexerRP", "PaladinRP", "JaegerRP", "DruidenRP", "MagierRP", "KriegerRP"}
 local selected = "RPChatMod"
 local main, controls = nil, {}
 local activeTab = "general"
@@ -29,7 +29,7 @@ local function showTab(which)
         end
     end
     if controls.raceLabel then
-        local mage = selected == "MagierRP"
+        local mage = (selected == "MagierRP" or selected == "KriegerRP")
         local rc = selected == "RPChatMod"
         for _, entry in ipairs(tabRegions.class) do
             local isMage = entry.widget == controls.mageLabel or entry.widget == controls.mageRaceValue or entry.widget == controls.mageRaceMinus or entry.widget == controls.mageRacePlus
@@ -76,6 +76,9 @@ local function setSetting(key, value)
         if not ok then info("Sprache nicht verfuegbar: "..tostring(why));return end
     elseif type(addon.SetSetting)=="function" then addon.SetSetting(key,value)
     else addon.db[key]=value end
+    if selected == "KriegerRP" and key == "textChance" and tonumber(value) == 0 and type(addon.ResetAmbientTimer) == "function" then
+        addon.ResetAmbientTimer()
+    end
     if db().debug then info(selected .. "." .. key .. " = " .. tostring(value)) end
 end
 local function dropdown(parent,x,y,width,options,onPick)
@@ -116,7 +119,7 @@ local function create()
     makeText(main,"AddOn",20,-45)
     controls.selectAddon=dropdown(main,120,-44,200,{
         {"RPChatMod","RPChatMod"},{"HexerRP","HexerRP"},{"PaladinRP","PaladinRP"},
-        {"JaegerRP","JaegerRP"},{"DruidenRP","DruidenRP"},{"MagierRP","MagierRP"}
+        {"JaegerRP","JaegerRP"},{"DruidenRP","DruidenRP"},{"MagierRP","MagierRP"},{"KriegerRP","KriegerRP"}
     },function(v) selected=v;refresh() end)
     controls.status=makeText(main,"",20,-88,560)
     buildingTab = "general"
@@ -164,7 +167,7 @@ local function create()
         db().debug=v;refresh()
     end)
     buildingTab = "ambient"
-    controls.ambientLabel=makeText(main,"Ambient-System (Hexer/Jäger/Paladin/Druide/Magier)",20,-431,520)
+    controls.ambientLabel=makeText(main,"Ambient-System (Hexer/Jäger/Paladin/Druide/Magier/Krieger)",20,-431,520)
     controls.ambient=checkbox(main,"Ambient aktiviert",20,-458,function(value)
         local a=current(); if not a or type(a.db.ambientEnabled) ~= "boolean" then return end
         setSetting("ambientEnabled",value)
@@ -212,17 +215,17 @@ local function create()
     controls.maxDown=button(main,"Max -30",425,-583,86,function() adjustInterval("max",-30) end)
     controls.maxUp=button(main,"Max +30",515,-583,86,function() adjustInterval("max",30) end)
     buildingTab = "class"
-    controls.mageLabel=makeText(main,"Magier: volkstypische Zaubertexte",20,-605,300)
+    controls.mageLabel=makeText(main,"Volkstypische Fähigkeits- und Zaubertexte",20,-605,300)
     controls.mageRaceValue=makeText(main,"--",305,-605,70)
     controls.mageRaceMinus=button(main,"- 10 %",390,-600,85,function()
         local a=current()
-        if selected~="MagierRP" or not a or type(a.db.racialTextChance)~="number" then return end
+        if (selected~="MagierRP" and selected~="KriegerRP") or not a or type(a.db.racialTextChance)~="number" then return end
         setSetting("racialTextChance",math.max(0,a.db.racialTextChance-10))
         refresh()
     end)
     controls.mageRacePlus=button(main,"+ 10 %",480,-600,85,function()
         local a=current()
-        if selected~="MagierRP" or not a or type(a.db.racialTextChance)~="number" then return end
+        if (selected~="MagierRP" and selected~="KriegerRP") or not a or type(a.db.racialTextChance)~="number" then return end
         setSetting("racialTextChance",math.min(100,a.db.racialTextChance+10))
         refresh()
     end)
@@ -271,7 +274,7 @@ refresh=function()
     controls.ambientChance:SetText(ambientAvailable and ("Ambient-Chance: "..tostring(d.ambientChance).." %") or "Ambient-Chance: --")
     controls.ambientInterval:SetText(ambientAvailable and ("Intervall: "..tostring(d.ambientMinInterval).." bis "..tostring(d.ambientMaxInterval).." Sekunden") or "Intervall: --")
     for _, b in ipairs({controls.minDown,controls.minUp,controls.maxDown,controls.maxUp}) do b:SetEnabled(ambientAvailable) end
-    local mage = present and selected=="MagierRP" and type(d.racialTextChance)=="number"
+    local mage = present and (selected=="MagierRP" or selected=="KriegerRP") and type(d.racialTextChance)=="number"
     controls.mageRaceValue:SetText(mage and (tostring(d.racialTextChance).." %") or "--")
     controls.mageRaceMinus:SetEnabled(mage)
     controls.mageRacePlus:SetEnabled(mage)

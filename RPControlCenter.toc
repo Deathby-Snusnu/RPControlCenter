@@ -4,6 +4,6 @@
 ## Author: Hannes
 ## Version: 0.3.0
 ## SavedVariablesPerCharacter: RPControlCenter_CharacterDB
-## OptionalDeps: RPChatMod, HexerRP, PaladinRP, JaegerRP, DruidenRP, MagierRP
+## OptionalDeps: RPChatMod, HexerRP, PaladinRP, JaegerRP, DruidenRP, MagierRP, KriegerRP
 
 RPControlCenter.lua

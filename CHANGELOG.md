@@ -2,6 +2,10 @@
 
 ## Aktueller Quellstand: 0.3.0 (unveröffentlicht)
 
+- KriegerRP zur Auswahl der Klassen-AddOns und zu den optionalen TOC-Abhängigkeiten ergänzt. Die volkstypische Textchance ist auch für KriegerRP in der Klasse-Ansicht einstellbar.
+- Die Ambient-Seite kann die KriegerRP-Automatik und ihre Intervalle neu konfigurieren. KriegerRP merkt Ambient-Texte nur vor und versendet sie erst bei einer bewusst ausgelösten RP-Aktion; der Timer startet keinen Chat-Versand.
+- Beschriftungen und README für Magier und Krieger vereinheitlicht. Tests und Ingame-Validierung stehen noch aus.
+
 - Die Oberfläche bietet Bereiche für allgemeine, Ambient- und
   klassenspezifische Einstellungen.
 - MagierRP ist auswählbar; seine Wahrscheinlichkeit für volkstypische
