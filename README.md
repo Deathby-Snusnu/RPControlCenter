@@ -74,5 +74,6 @@ ist. Unter **Klasse** kann dieselbe volkstypische Textchance wie beim Magier
 geändert werden. Sprache, Chatkanal, Textchance und Cooldown bleiben
 charakterbezogene Einstellungen in `KriegerRP_CharacterDB`.
 
-KriegerRP befindet sich vorerst als eigenständiger AddOn-Ordner im
-Sammelrepository RPAddOns, noch nicht als separates GitHub-Repository.
+KriegerRP wird in einem eigenständigen GitHub-Repository entwickelt:
+[Deathby-Snusnu/KriegerRP](https://github.com/Deathby-Snusnu/KriegerRP).
+RPAddOns bindet es als Git-Submodul ein.
