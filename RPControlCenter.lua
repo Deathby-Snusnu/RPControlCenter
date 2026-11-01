@@ -212,7 +212,7 @@ local function create()
     controls.maxDown=button(main,"Max -30",425,-583,86,function() adjustInterval("max",-30) end)
     controls.maxUp=button(main,"Max +30",515,-583,86,function() adjustInterval("max",30) end)
     buildingTab = "class"
-    controls.mageLabel=makeText(main,"Magier: volkstypische Zaubertexte",20,-605,300)
+    controls.mageLabel=makeText(main,"Volkstypische Fähigkeits- und Zaubertexte",20,-605,300)
     controls.mageRaceValue=makeText(main,"--",305,-605,70)
     controls.mageRaceMinus=button(main,"- 10 %",390,-600,85,function()
         local a=current()
