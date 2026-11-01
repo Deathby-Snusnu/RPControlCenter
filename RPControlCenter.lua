@@ -164,7 +164,7 @@ local function create()
         db().debug=v;refresh()
     end)
     buildingTab = "ambient"
-    controls.ambientLabel=makeText(main,"Ambient-System (Hexer/Jäger/Paladin/Druide/Magier)",20,-431,520)
+    controls.ambientLabel=makeText(main,"Ambient-System (Hexer/Jäger/Paladin/Druide/Magier/Krieger)",20,-431,520)
     controls.ambient=checkbox(main,"Ambient aktiviert",20,-458,function(value)
         local a=current(); if not a or type(a.db.ambientEnabled) ~= "boolean" then return end
         setSetting("ambientEnabled",value)
