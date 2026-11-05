@@ -100,4 +100,4 @@ Siehe das [KriegerRP-Ambient-Handbuch](https://github.com/Deathby-Snusnu/Krieger
 
 PriesterRP erscheint in der AddOn-Auswahl, sobald es installiert und geladen ist. Der Reiter **Klasse** steuert `racialTextChance`, **Ambient** steuert vorgemerkte Ambient-Texte. Sprache, Ausgabechance, Cooldown und Kanal bleiben pro Charakter in `PriesterRP_CharacterDB` gespeichert. Das Control Center verändert keine Quelldateien des Priester-AddOns.
 
-Der erste PriesterRP-Quellstand liegt als übergangsweise direkt gepflegter Ordner unter `RPAddOns/addons/PriesterRP`, bis das eigenständige Repository erstellt und als Submodul eingehängt werden kann.
+PriesterRP liegt jetzt als eigenständiges Repository unter [Deathby-Snusnu/PriesterRP](https://github.com/Deathby-Snusnu/PriesterRP) und wird über `RPAddOns/addons/PriesterRP` als Git-Submodul eingebunden. Nach Aktualisierungen den Submodulzeiger des Sammelprojekts nachziehen.
