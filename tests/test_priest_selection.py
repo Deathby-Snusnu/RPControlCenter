@@ -14,7 +14,7 @@ class PriestIntegrationTests(unittest.TestCase):
     def test_priest_chance_and_ambient_controls(self):
         self.assertIn('selected~="PriesterRP"', CODE)
         self.assertIn('selected=="PriesterRP"', CODE)
-        self.assertIn('selected == "PriesterRP") and key == "textChance"', CODE)
+        self.assertIn('selected == "PriesterRP" and key == "textChance"', CODE)
         self.assertIn('addon.ResetAmbientTimer()', CODE)
         self.assertIn('setSetting("racialTextChance"', CODE)
 if __name__ == "__main__":
