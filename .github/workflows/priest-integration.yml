@@ -1,0 +1,24 @@
+name: RPControlCenter priest integration
+on:
+  push:
+    paths:
+      - 'RPControlCenter.lua'
+      - 'RPControlCenter.toc'
+      - 'tests/test_priest_selection.py'
+      - '.github/workflows/priest-integration.yml'
+  pull_request:
+    paths:
+      - 'RPControlCenter.lua'
+      - 'RPControlCenter.toc'
+      - 'tests/test_priest_selection.py'
+      - '.github/workflows/priest-integration.yml'
+jobs:
+  static-contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m unittest discover -s . -p 'test_*.py' -v
+      - run: python -m unittest discover -s tests -p 'test_*.py' -v

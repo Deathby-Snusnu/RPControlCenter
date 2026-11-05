@@ -1,6 +1,6 @@
 # RP Control Center 0.3.0
 
-Zentrales Ingame-Fenster für RPChatMod, HexerRP, PaladinRP, JaegerRP, DruidenRP MagierRP und KriegerRP (sobald installiert).
+Zentrales Ingame-Fenster für RPChatMod, HexerRP, PaladinRP, JaegerRP, DruidenRP, MagierRP, KriegerRP und PriesterRP (sobald installiert).
 
 ## Installation
 
@@ -57,7 +57,7 @@ AddOns. Im Spiel persistiert WoW SavedVariables beim Ausloggen/Reload.
 
 ## Test im Spiel
 
-1. `/rpconfig`, die sechs auswählbaren Text-AddOns durchschalten, insbesondere MagierRP und seine Kanalauswahl.
+1. `/rpconfig`, die acht auswählbaren Text-AddOns durchschalten, insbesondere MagierRP und seine Kanalauswahl.
 2. RPChatMod: Volkssprache `auto`, Gruppensprache aktivieren, mit `/rc languagestatus` testen.
 3. RP-Ausgabe deaktivieren, Chat-Text kontrollieren und anschließend wieder aktivieren.
 4. `/reload`, gespeicherte Werte kontrollieren.
@@ -95,3 +95,9 @@ Neue Krieger-Charaktere starten mit 30 % Textchance, 20 Sekunden
 Cooldown und aktivierter Ambient-Vormerkung (180 bis 420 Sekunden).
 Vorhandene SavedVariables werden nicht pauschal überschrieben.
 Siehe das [KriegerRP-Ambient-Handbuch](https://github.com/Deathby-Snusnu/KriegerRP/blob/feature/initial-warrior-addon/AMBIENT.md).
+
+## PriesterRP
+
+PriesterRP erscheint in der AddOn-Auswahl, sobald es installiert und geladen ist. Der Reiter **Klasse** steuert `racialTextChance`, **Ambient** steuert vorgemerkte Ambient-Texte. Sprache, Ausgabechance, Cooldown und Kanal bleiben pro Charakter in `PriesterRP_CharacterDB` gespeichert. Das Control Center verändert keine Quelldateien des Priester-AddOns.
+
+PriesterRP liegt jetzt als eigenständiges Repository unter [Deathby-Snusnu/PriesterRP](https://github.com/Deathby-Snusnu/PriesterRP) und wird über `RPAddOns/addons/PriesterRP` als Git-Submodul eingebunden. Nach Aktualisierungen den Submodulzeiger des Sammelprojekts nachziehen.
