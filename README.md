@@ -57,7 +57,7 @@ AddOns. Im Spiel persistiert WoW SavedVariables beim Ausloggen/Reload.
 
 ## Test im Spiel
 
-1. `/rpconfig`, die sechs auswählbaren Text-AddOns durchschalten, insbesondere MagierRP und seine Kanalauswahl.
+1. `/rpconfig`, die acht auswählbaren Text-AddOns durchschalten, insbesondere MagierRP und seine Kanalauswahl.
 2. RPChatMod: Volkssprache `auto`, Gruppensprache aktivieren, mit `/rc languagestatus` testen.
 3. RP-Ausgabe deaktivieren, Chat-Text kontrollieren und anschließend wieder aktivieren.
 4. `/reload`, gespeicherte Werte kontrollieren.
