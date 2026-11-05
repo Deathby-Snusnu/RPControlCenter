@@ -2,6 +2,8 @@
 
 ## Aktueller Quellstand: 0.3.0 (unveröffentlicht)
 
+- PriesterRP zur AddOn-Auswahl, optionalen TOC-Abhängigkeit und Klassen-/Ambient-Steuerung aufgenommen. Reset der vorgemerkten Ambient-Timer bei deaktivierter Ausgabe. Integration zunächst über RPAddOns; Ingame-Test ausstehend.
+
 - KriegerRP zur Auswahl der Klassen-AddOns und zu den optionalen TOC-Abhängigkeiten ergänzt. Die volkstypische Textchance ist auch für KriegerRP in der Klasse-Ansicht einstellbar.
 - Die Ambient-Seite kann die KriegerRP-Automatik und ihre Intervalle neu konfigurieren. KriegerRP merkt Ambient-Texte nur vor und versendet sie erst bei einer bewusst ausgelösten RP-Aktion; der Timer startet keinen Chat-Versand.
 - Beschriftungen und README für Magier und Krieger vereinheitlicht. Tests und Ingame-Validierung stehen noch aus.

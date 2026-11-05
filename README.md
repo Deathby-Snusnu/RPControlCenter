@@ -1,6 +1,6 @@
 # RP Control Center 0.3.0
 
-Zentrales Ingame-Fenster für RPChatMod, HexerRP, PaladinRP, JaegerRP, DruidenRP MagierRP und KriegerRP (sobald installiert).
+Zentrales Ingame-Fenster für RPChatMod, HexerRP, PaladinRP, JaegerRP, DruidenRP MagierRP KriegerRP und PriesterRP (sobald installiert).
 
 ## Installation
 
@@ -95,3 +95,9 @@ Neue Krieger-Charaktere starten mit 30 % Textchance, 20 Sekunden
 Cooldown und aktivierter Ambient-Vormerkung (180 bis 420 Sekunden).
 Vorhandene SavedVariables werden nicht pauschal überschrieben.
 Siehe das [KriegerRP-Ambient-Handbuch](https://github.com/Deathby-Snusnu/KriegerRP/blob/feature/initial-warrior-addon/AMBIENT.md).
+
+## PriesterRP
+
+PriesterRP erscheint in der AddOn-Auswahl, sobald es installiert und geladen ist. Der Reiter **Klasse** steuert `racialTextChance`, **Ambient** steuert vorgemerkte Ambient-Texte. Sprache, Ausgabechance, Cooldown und Kanal bleiben pro Charakter in `PriesterRP_CharacterDB` gespeichert. Das Control Center verändert keine Quelldateien des Priester-AddOns.
+
+Der erste PriesterRP-Quellstand liegt als übergangsweise direkt gepflegter Ordner unter `RPAddOns/addons/PriesterRP`, bis das eigenständige Repository erstellt und als Submodul eingehängt werden kann.
