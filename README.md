@@ -1,6 +1,6 @@
 # RP Control Center 0.3.0
 
-Zentrales Ingame-Fenster für RPChatMod, HexerRP, PaladinRP, JaegerRP, DruidenRP MagierRP KriegerRP und PriesterRP (sobald installiert).
+Zentrales Ingame-Fenster für RPChatMod, HexerRP, PaladinRP, JaegerRP, DruidenRP, MagierRP, KriegerRP und PriesterRP (sobald installiert).
 
 ## Installation
 
