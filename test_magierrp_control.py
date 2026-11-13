@@ -9,8 +9,7 @@ class MageControlTests(unittest.TestCase):
         self.assertIn('local addon = _G[selected]', SOURCE)
 
     def test_racial_chance_bound_to_selected_addon(self):
-        self.assertIn('selected~="RPChatMod"', SOURCE)
-        self.assertIn('type(d.racialTextChance)=="number"', SOURCE)
+        self.assertIn('local mage = present and selected~="RPChatMod" and type(d.racialTextChance)=="number"', SOURCE)
         self.assertIn('setSetting("racialTextChance"', SOURCE)
         self.assertIn('math.min(100', SOURCE)
         self.assertIn('math.max(0', SOURCE)
