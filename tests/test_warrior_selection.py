@@ -12,8 +12,7 @@ class WarriorIntegrationTests(unittest.TestCase):
         self.assertIn('"KriegerRP"', code)
         self.assertIn('MagierRP, KriegerRP', toc)
         self.assertIn('Volkstypische Fähigkeits- und Zaubertexte', code)
-        self.assertIn('selected~="KriegerRP"', code)
-        self.assertIn('selected=="KriegerRP"', code)
+        self.assertIn('local mage = present and selected~="RPChatMod" and type(d.racialTextChance)=="number"', code)
 
     def test_disabling_krieger_output_resets_ambient_timer(self):
         self.assertIn(
