@@ -28,6 +28,10 @@ Diagnosemodus und zuletzt verwendete Textchancen in
 erneuten Öffnen aktualisiert. Die Bereiche heißen **Allgemein**, **Ambient**
 und **Klasse**.
 
+## HexerRP MusicRP
+
+Im Tab **Klasse** erscheinen bei ausgewähltem und geladenem **HexerRP** zwei zusätzliche Bedienelemente: **MusicRP aktivieren** und **MusicRP-Chance ±5 %**. Die Werte `musicEnabled` und `musicChance` (0–100 %) werden direkt in den HexerRP-Charaktereinstellungen gespeichert. Die GUI verändert keine MusicRP-Textdateien und ist bei allen anderen AddOns ausgeblendet. MusicRP ist in HexerRP standardmäßig ausgeschaltet.
+
 ## MagierRP
 
 MagierRP erscheint in der AddOn-Auswahl. Für ein geladenes MagierRP gibt es die
