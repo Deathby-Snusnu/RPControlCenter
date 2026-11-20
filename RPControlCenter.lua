@@ -28,6 +28,11 @@ local function showTab(which)
             if tab == which then widget:Show() else widget:Hide() end
         end
     end
+    if controls.musicWidgets then
+        for _, widget in ipairs(controls.musicWidgets) do
+            if which ~= "class" or selected ~= "HexerRP" then widget:Hide() end
+        end
+    end
     if controls.raceLabel then
         local mage = selected ~= "RPChatMod"
         local rc = selected == "RPChatMod"
@@ -231,6 +236,26 @@ local function create()
         setSetting("racialTextChance",math.min(100,a.db.racialTextChance+10))
         refresh()
     end)
+    -- HexerRP MusicRP lives on the class tab; only show it for HexerRP.
+    controls.musicEnabled,controls.musicEnabledLabel=checkbox(main,"MusicRP (HexerRP)",20,-750,function(value)
+        local a=current()
+        if not a or selected~="HexerRP" or type(a.db.musicEnabled)~="boolean" then return end
+        setSetting("musicEnabled",value);refresh()
+    end)
+    controls.musicChanceLabel=makeText(main,"MusicRP-Chance: --",20,-790,210)
+    controls.musicMinus=button(main,"- 5 %",260,-785,90,function()
+        local a=current()
+        if not a or selected~="HexerRP" or type(a.db.musicChance)~="number" then return end
+        setSetting("musicChance",math.max(0,a.db.musicChance-5));refresh()
+    end)
+    controls.musicPlus=button(main,"+ 5 %",365,-785,90,function()
+        local a=current()
+        if not a or selected~="HexerRP" or type(a.db.musicChance)~="number" then return end
+        setSetting("musicChance",math.min(100,a.db.musicChance+5));refresh()
+    end)
+    controls.musicHint=makeText(main,"Eigene Songmotive, keine Original-Lyrics",20,-825,460)
+    controls.musicWidgets={controls.musicEnabled,controls.musicEnabledLabel,
+        controls.musicChanceLabel,controls.musicMinus,controls.musicPlus,controls.musicHint}
     controls.statusButton=button(main,"Sprachstatus",390,-700,150,function()
         local a=_G.RPChatMod
         if a and a.ready and a.HandleCommand then a.HandleCommand("languagestatus")
@@ -280,6 +305,14 @@ refresh=function()
     controls.mageRaceValue:SetText(mage and (tostring(d.racialTextChance).." %") or "--")
     controls.mageRaceMinus:SetEnabled(mage)
     controls.mageRacePlus:SetEnabled(mage)
+    local musicAvailable=present and selected=="HexerRP"
+        and type(d.musicEnabled)=="boolean" and type(d.musicChance)=="number"
+    controls.musicEnabled:SetChecked(musicAvailable and d.musicEnabled)
+    controls.musicEnabled:SetEnabled(musicAvailable)
+    controls.musicChanceLabel:SetText(musicAvailable and
+        ("MusicRP-Chance: "..tostring(d.musicChance).." %") or "MusicRP-Chance: --")
+    controls.musicMinus:SetEnabled(musicAvailable)
+    controls.musicPlus:SetEnabled(musicAvailable)
     controls.debug:SetChecked(db().debug)
     showTab(activeTab)
     -- Disable protected choices when the chosen addon is unavailable.
