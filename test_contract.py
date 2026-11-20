@@ -16,6 +16,11 @@ class Contract(unittest.TestCase):
   version=re.search(r'^## Version:\s*(\S+)',toc,re.MULTILINE)
   self.assertIsNotNone(version)
   self.assertIn(f'main.TitleText:SetText("RP Control Center {version.group(1)}")',source)
+ def test_musicrp_hexer_controls(self):
+  for token in ('controls.musicEnabled','controls.musicChanceLabel','musicEnabled','musicChance','selected=="HexerRP"','musicWidgets'):
+   self.assertIn(token,source)
+  self.assertIn('math.max(0,a.db.musicChance-5)',source)
+  self.assertIn('math.min(100,a.db.musicChance+5)',source)
  def test_no_crossaddon_changes(self):
   for addon in ('RPChatMod','HexerRP','PaladinRP','JaegerRP','DruidenRP'):self.assertIn(addon,source)
 if __name__=='__main__': unittest.main()
