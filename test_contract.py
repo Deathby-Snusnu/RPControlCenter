@@ -17,7 +17,7 @@ class Contract(unittest.TestCase):
   self.assertIsNotNone(version)
   self.assertIn(f'main.TitleText:SetText("RP Control Center {version.group(1)}")',source)
  def test_musicrp_hexer_controls(self):
-  for token in ('controls.musicEnabled','controls.musicChanceLabel','musicEnabled','musicChance','selected=="HexerRP"','selected=="JaegerRP"','selected=="PaladinRP"','selected=="MagierRP"','selected=="KriegerRP"','musicWidgets'):
+  for token in ('controls.musicEnabled','controls.musicChanceLabel','musicEnabled','musicChance','selected=="HexerRP"','selected=="JaegerRP"','selected=="PaladinRP"','selected=="MagierRP"','selected=="KriegerRP"','selected=="PriesterRP"','selected=="DruidenRP"','musicWidgets'):
    self.assertIn(token,source)
   self.assertIn('math.max(0,a.db.musicChance-5)',source)
   self.assertIn('math.min(100,a.db.musicChance+5)',source)

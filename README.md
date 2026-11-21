@@ -28,9 +28,9 @@ Diagnosemodus und zuletzt verwendete Textchancen in
 erneuten Öffnen aktualisiert. Die Bereiche heißen **Allgemein**, **Ambient**
 und **Klasse**.
 
-## MusicRP für HexerRP, JaegerRP, PaladinRP, MagierRP und KriegerRP
+## MusicRP für HexerRP, JaegerRP, PaladinRP, MagierRP, KriegerRP, PriesterRP und DruidenRP
 
-Im Tab **Klasse** erscheinen bei ausgewähltem **HexerRP, JaegerRP, PaladinRP, MagierRP oder KriegerRP** zwei zusätzliche Bedienelemente: **MusicRP aktivieren** und **MusicRP-Chance ±5 %**. Ihre Nutzung erfordert eine geladene, bereite Version des jeweiligen AddOns mit MusicRP-Unterstützung und den Charaktereinstellungen `musicEnabled` und `musicChance`. Ohne diese Voraussetzungen bleiben die Bedienelemente sichtbar, aber deaktiviert; bei allen anderen AddOn-Auswahlen sind sie ausgeblendet. Die Werte `musicEnabled` und `musicChance` (0–100 %) werden direkt in den jeweiligen Charaktereinstellungen gespeichert. Die GUI verändert keine MusicRP-Textdateien. MusicRP ist in HexerRP standardmäßig ausgeschaltet.
+Im Tab **Klasse** erscheinen bei ausgewähltem **HexerRP, JaegerRP, PaladinRP, MagierRP, KriegerRP, PriesterRP oder DruidenRP** zwei zusätzliche Bedienelemente: **MusicRP aktivieren** und **MusicRP-Chance ±5 %**. Ihre Nutzung erfordert eine geladene, bereite Version des jeweiligen AddOns mit MusicRP-Unterstützung und den Charaktereinstellungen `musicEnabled` und `musicChance`. Ohne diese Voraussetzungen bleiben die Bedienelemente sichtbar, aber deaktiviert; bei allen anderen AddOn-Auswahlen sind sie ausgeblendet. Die Werte `musicEnabled` und `musicChance` (0–100 %) werden direkt in den jeweiligen Charaktereinstellungen gespeichert. Die GUI verändert keine MusicRP-Textdateien. MusicRP ist in HexerRP standardmäßig ausgeschaltet.
 
 ## MagierRP
 
