@@ -30,7 +30,7 @@ local function showTab(which)
     end
     if controls.musicWidgets then
         for _, widget in ipairs(controls.musicWidgets) do
-            if which ~= "class" or not (selected == "HexerRP" or selected == "JaegerRP" or selected == "PaladinRP" or selected == "MagierRP" or selected == "KriegerRP") then widget:Hide() end
+            if which ~= "class" or not (selected == "HexerRP" or selected == "JaegerRP" or selected == "PaladinRP" or selected == "MagierRP" or selected == "KriegerRP" or selected == "PriesterRP" or selected == "DruidenRP") then widget:Hide() end
         end
     end
     if controls.raceLabel then
@@ -239,18 +239,18 @@ local function create()
     -- MusicRP appears for addons with compatible per-character settings.
     controls.musicEnabled,controls.musicEnabledLabel=checkbox(main,"MusicRP (Klassen mit MusicRP)",20,-750,function(value)
         local a=current()
-        if not a or (selected~="HexerRP" and selected~="JaegerRP" and selected~="PaladinRP" and selected~="MagierRP" and selected~="KriegerRP") or type(a.db.musicEnabled)~="boolean" then return end
+        if not a or (selected~="HexerRP" and selected~="JaegerRP" and selected~="PaladinRP" and selected~="MagierRP" and selected~="KriegerRP" and selected~="PriesterRP" and selected~="DruidenRP") or type(a.db.musicEnabled)~="boolean" then return end
         setSetting("musicEnabled",value);refresh()
     end)
     controls.musicChanceLabel=makeText(main,"MusicRP-Chance: --",20,-790,210)
     controls.musicMinus=button(main,"- 5 %",260,-785,90,function()
         local a=current()
-        if not a or (selected~="HexerRP" and selected~="JaegerRP" and selected~="PaladinRP" and selected~="MagierRP" and selected~="KriegerRP") or type(a.db.musicChance)~="number" then return end
+        if not a or (selected~="HexerRP" and selected~="JaegerRP" and selected~="PaladinRP" and selected~="MagierRP" and selected~="KriegerRP" and selected~="PriesterRP" and selected~="DruidenRP") or type(a.db.musicChance)~="number" then return end
         setSetting("musicChance",math.max(0,a.db.musicChance-5));refresh()
     end)
     controls.musicPlus=button(main,"+ 5 %",365,-785,90,function()
         local a=current()
-        if not a or (selected~="HexerRP" and selected~="JaegerRP" and selected~="PaladinRP" and selected~="MagierRP" and selected~="KriegerRP") or type(a.db.musicChance)~="number" then return end
+        if not a or (selected~="HexerRP" and selected~="JaegerRP" and selected~="PaladinRP" and selected~="MagierRP" and selected~="KriegerRP" and selected~="PriesterRP" and selected~="DruidenRP") or type(a.db.musicChance)~="number" then return end
         setSetting("musicChance",math.min(100,a.db.musicChance+5));refresh()
     end)
     controls.musicHint=makeText(main,"Eigene Songmotive, keine Original-Lyrics",20,-825,460)
@@ -305,7 +305,7 @@ refresh=function()
     controls.mageRaceValue:SetText(mage and (tostring(d.racialTextChance).." %") or "--")
     controls.mageRaceMinus:SetEnabled(mage)
     controls.mageRacePlus:SetEnabled(mage)
-    local musicAvailable=present and (selected=="HexerRP" or selected=="JaegerRP" or selected=="PaladinRP" or selected=="MagierRP" or selected=="KriegerRP")
+    local musicAvailable=present and (selected=="HexerRP" or selected=="JaegerRP" or selected=="PaladinRP" or selected=="MagierRP" or selected=="KriegerRP" or selected=="PriesterRP" or selected=="DruidenRP")
         and type(d.musicEnabled)=="boolean" and type(d.musicChance)=="number"
     controls.musicEnabled:SetChecked(musicAvailable and d.musicEnabled)
     controls.musicEnabled:SetEnabled(musicAvailable)
